@@ -1,11 +1,11 @@
-# خادم Nginx خفيف
 FROM nginx:alpine
 
-# ننسخ إعداد Nginx (بيسمع على 8080 بدل 80 مشان بعض المنصات)
-COPY ./nginx.conf /etc/nginx/conf.d/default.conf
-COPY . /usr/share/nginx/html/
-# المنصة عادةً بتربط البورت خارجيًا، بس منعلن عن 8080 للوضوح
-EXPOSE 8080
+# انسخ ملفات الموقع (index.html و أي مجلد assets)
+COPY . /usr/share/nginx/html
 
-# تشغيل Nginx بالـ foreground
+# غيمة بتحب عادة تسمع على $PORT بدل رقم ثابت
+ENV PORT=80
+EXPOSE 80
+
 CMD ["nginx", "-g", "daemon off;"]
+
